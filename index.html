@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>collin kipchumba — Assignment Help &amp; Freelance Code</title>
+<meta name="description" content="Assignment help and freelance coding — clean, on-time, graded A+.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12161d;
+    --ink-2:#1b212b;
+    --paper:#f2ede1;
+    --paper-dim:#e7e0d0;
+    --pen:#d64545;
+    --mint:#4fae8e;
+    --slate:#8b93a1;
+    --gold:#e3b23c;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --body: 'Manrope', -apple-system, sans-serif;
+    --radius: 10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--pen);color:var(--paper);}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- layout shell ---------- */
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,22,29,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(242,237,225,0.08);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:18px;padding-bottom:18px;
+  }
+  .brand{
+    font-family:var(--mono);font-weight:800;font-size:17px;
+    letter-spacing:-0.02em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--mint);
+    box-shadow:0 0 0 3px rgba(79,174,142,0.18);}
+  .navlinks{display:flex;gap:28px;font-family:var(--mono);font-size:13px;color:var(--slate);}
+  .navlinks a{text-decoration:none;transition:color .15s;}
+  .navlinks a:hover{color:var(--paper);}
+  @media (max-width:640px){ .navlinks{display:none;} }
+  .btn-wa-small{
+    font-family:var(--mono);font-size:12.5px;font-weight:700;
+    background:var(--mint);color:#0c1a15;padding:9px 16px;border-radius:100px;
+    text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-wa-small:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(79,174,142,0.35);}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:72px;padding-bottom:48px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;gap:44px;} }
+
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;color:var(--mint);
+    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--mint);display:inline-block;}
+
+  h1{
+    font-family:var(--mono);font-weight:800;font-size:clamp(34px,5vw,56px);
+    line-height:1.06;letter-spacing:-0.02em;margin:0 0 22px;
+  }
+  h1 .strike{color:var(--slate);text-decoration:line-through;text-decoration-color:var(--pen);text-decoration-thickness:3px;}
+  h1 .fix{color:var(--mint);}
+
+  .hero p.lede{
+    font-size:17px;color:#cfc9ba;max-width:46ch;margin:0 0 34px;
+  }
+
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    font-family:var(--mono);font-weight:700;font-size:14.5px;
+    background:var(--mint);color:#0c1a15;padding:15px 26px;border-radius:8px;
+    text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(79,174,142,0.3);}
+  .btn-ghost{
+    font-family:var(--mono);font-weight:600;font-size:14.5px;
+    color:var(--paper);padding:15px 22px;border-radius:8px;
+    border:1px solid rgba(242,237,225,0.22);text-decoration:none;
+    transition:border-color .15s, background .15s;
+  }
+  .btn-ghost:hover{border-color:var(--paper);background:rgba(242,237,225,0.06);}
+
+  .stat-row{display:flex;gap:30px;margin-top:44px;flex-wrap:wrap;}
+  .stat b{font-family:var(--mono);font-size:26px;display:block;color:var(--paper);}
+  .stat span{font-size:12.5px;color:var(--slate);font-family:var(--mono);}
+
+  /* ---------- terminal signature ---------- */
+  .terminal{
+    background:var(--ink-2);
+    border-radius:12px;
+    border:1px solid rgba(242,237,225,0.09);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+    overflow:hidden;
+    position:relative;
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:13px 16px;background:rgba(0,0,0,0.22);
+    border-bottom:1px solid rgba(242,237,225,0.07);
+  }
+  .term-bar span{width:10px;height:10px;border-radius:50%;background:#3a4150;}
+  .term-bar .fname{
+    margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--slate);
+  }
+  .term-body{padding:22px 20px 26px;font-family:var(--mono);font-size:13.5px;min-height:280px;}
+  .term-line{color:#a9b2c3;margin-bottom:6px;white-space:pre-wrap;}
+  .term-line .cmt{color:#5c6577;}
+  .term-line .str{color:var(--gold);}
+  .term-line .kw{color:#7fb3e8;}
+  .cursor{display:inline-block;width:7px;height:15px;background:var(--mint);vertical-align:middle;margin-left:2px;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .grade-stamp{
+    position:absolute;top:20px;right:20px;
+    font-family:var(--mono);font-weight:800;font-size:13px;
+    color:var(--pen);border:2px solid var(--pen);border-radius:50%;
+    width:64px;height:64px;display:flex;align-items:center;justify-content:center;
+    transform:rotate(9deg);opacity:0;
+    transition:opacity .6s ease .4s, transform .6s ease .4s;
+    background:rgba(214,69,69,0.06);
+    text-align:center;line-height:1.05;
+  }
+  .grade-stamp.show{opacity:1;transform:rotate(9deg) scale(1);}
+  @media (prefers-reduced-motion:reduce){
+    .cursor{animation:none;}
+    .grade-stamp{transition:none;}
+  }
+
+  /* ---------- section headers ---------- */
+  .sec-head{margin-bottom:44px;}
+  .sec-head .eyebrow{margin-bottom:12px;}
+  .sec-head h2{
+    font-family:var(--mono);font-weight:800;font-size:clamp(24px,3.4vw,34px);
+    letter-spacing:-0.01em;margin:0;
+  }
+
+  /* ---------- services ---------- */
+  .services{border-top:1px solid rgba(242,237,225,0.08);}
+  .svc-list{display:flex;flex-direction:column;border-top:1px solid rgba(242,237,225,0.1);}
+  .svc-row{
+    display:grid;grid-template-columns:40px 1fr auto;gap:20px;align-items:center;
+    padding:22px 4px;border-bottom:1px solid rgba(242,237,225,0.1);
+    transition:background .15s;
+  }
+  .svc-row:hover{background:rgba(242,237,225,0.03);}
+  .svc-num{font-family:var(--mono);color:var(--slate);font-size:13px;}
+  .svc-name{font-family:var(--mono);font-weight:700;font-size:16.5px;}
+  .svc-desc{color:var(--slate);font-size:13.5px;font-weight:400;font-family:var(--body);margin-top:4px;}
+  .svc-tag{
+    font-family:var(--mono);font-size:11.5px;color:var(--mint);
+    border:1px solid rgba(79,174,142,0.35);padding:5px 11px;border-radius:100px;
+    white-space:nowrap;
+  }
+
+  /* ---------- projects ---------- */
+  .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:860px){ .projects-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .projects-grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--paper);color:var(--ink);
+    border-radius:var(--radius);padding:24px;position:relative;
+    min-height:190px;display:flex;flex-direction:column;justify-content:space-between;
+    transform:rotate(0deg);transition:transform .2s ease, box-shadow .2s ease;
+    box-shadow:0 1px 0 rgba(0,0,0,0.2);
+  }
+  .card:nth-child(2){transform:rotate(-0.6deg);}
+  .card:nth-child(3){transform:rotate(0.5deg);}
+  .card:hover{transform:translateY(-4px) rotate(0deg);box-shadow:0 18px 30px -12px rgba(0,0,0,0.45);}
+  .card .check{
+    position:absolute;top:16px;right:16px;color:var(--mint);font-size:20px;font-family:var(--mono);
+  }
+  .card .k{font-family:var(--mono);font-size:11px;color:var(--pen);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;}
+  .card h3{font-family:var(--mono);font-size:16.5px;margin:0 0 10px;letter-spacing:-0.01em;}
+  .card p{font-size:13.5px;color:#4a4438;margin:0 0 14px;}
+  .card .stack{display:flex;gap:6px;flex-wrap:wrap;}
+  .card .stack span{
+    font-family:var(--mono);font-size:11px;background:rgba(18,22,29,0.08);
+    padding:4px 9px;border-radius:5px;color:#3a352b;
+  }
+
+  /* ---------- skills ---------- */
+  .skills-wrap{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    font-family:var(--mono);font-size:13px;padding:9px 15px;border-radius:7px;
+    border:1px solid rgba(242,237,225,0.15);color:#d8d2c3;
+  }
+  .chip b{color:var(--mint);font-weight:700;}
+
+  /* ---------- process ---------- */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(242,237,225,0.1);border-radius:12px;overflow:hidden;}
+  @media (max-width:760px){ .process{grid-template-columns:1fr 1fr;} }
+  .p-step{background:var(--ink-2);padding:28px 22px;}
+  .p-step .n{font-family:var(--mono);color:var(--pen);font-size:13px;margin-bottom:10px;}
+  .p-step h4{font-family:var(--mono);font-size:15px;margin:0 0 8px;}
+  .p-step p{font-size:13px;color:var(--slate);margin:0;}
+
+  /* ---------- contact / footer ---------- */
+  .contact{
+    text-align:center;border-top:1px solid rgba(242,237,225,0.08);
+  }
+  .contact h2{
+    font-family:var(--mono);font-weight:800;font-size:clamp(28px,5vw,46px);
+    letter-spacing:-0.02em;margin:0 0 18px;
+  }
+  .contact p{color:var(--slate);max-width:46ch;margin:0 auto 36px;}
+  .contact .cta-row{justify-content:center;}
+  footer{padding:32px 0;border-top:1px solid rgba(242,237,225,0.08);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer p{font-family:var(--mono);font-size:12px;color:var(--slate);margin:0;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand"><span class="dot"></span>collin.kipchumba</div>
+    <div class="navlinks">
+      <a href="#services">services</a>
+      <a href="#work">work</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </div>
+    <!-- EDIT: replace +19098953904 with your WhatsApp number, country code, no + or spaces -->
+    <a class="btn-wa-small" href="https://wa.me/+19098953904?text=Hi%20collin%2C%20I%20need%20help%20with%20an%20assignment" target="_blank" rel="noopener">
+      WhatsApp →
+    </a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">assignment help · freelance dev</div>
+        <h1>Stuck on it?<br><span class="strike">Stressed.</span> <span class="fix">Sorted.</span></h1>
+        <p class="lede">
+          I take your assignment, code task, or freelance brief and hand back working, well-documented,
+          on-time results — Essays, Discussions, Coding, Labs, Quizes Python, web apps, data structures, reports, and more.
+        </p>
+        <div class="cta-row">
+          <!-- EDIT: replace number -->
+          <a class="btn-primary" href="https://wa.me/+19098953904?text=Hi%20collin%2C%20I%20need%20help%20with%20an%20assignment" target="_blank" rel="noopener">
+            Chat on WhatsApp
+          </a>
+          <!-- EDIT: replace email -->
+          <a class="btn-ghost" href="mailto:collinkipchumba715@gmail.com">Email me</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>120+</b><span>tasks delivered</span></div>
+          <div class="stat"><b>4.9★</b><span>avg. rating</span></div>
+          <div class="stat"><b>&lt;24h</b><span>typical turnaround</span></div>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="term-bar">
+          <span style="background:#e5605a"></span><span style="background:#e3b23c"></span><span style="background:#4fae8e"></span>
+          <span class="fname">assignment_solved.py</span>
+        </div>
+        <div class="term-body" id="term">
+          <div class="grade-stamp" id="stamp">A+<br>10/10</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">what I do</div>
+        <h2>Pick a task, I'll handle it</h2>
+      </div>
+      <div class="svc-list reveal">
+        <div class="svc-row">
+          <div class="svc-num">01</div>
+           <div>
+            <div class="svc-name">Full Courwork Help</div>
+            <div class="svc-desc">Business Courses, MSIT, Computer Science - i will manage to give a good GPA of over 3.7, also support during residncy quick assignments.</div>
+          </div>
+          <div>
+            <div class="svc-name">Programming Assignments</div>
+            <div class="svc-desc">Python, Java, C/C++, DSA, OOP — clean code plus comments explaining the logic.</div>
+          </div>
+          <div class="svc-tag">most requested</div>
+        </div>
+        <div class="svc-row">
+          <div class="svc-num">02</div>
+          <div>
+            <div class="svc-name">Web &amp; App Development</div>
+            <div class="svc-desc">Landing pages, dashboards, small full-stack apps — React, Node, Flask, Django.</div>
+          </div>
+          <div class="svc-tag">freelance</div>
+        </div>
+        <div class="svc-row">
+          <div class="svc-num">03</div>
+          <div>
+            <div class="svc-name">Data &amp; Analysis Tasks</div>
+            <div class="svc-desc">Pandas/Excel cleanup, SQL queries, basic ML notebooks, chart-ready output.</div>
+          </div>
+          <div class="svc-tag">fast turnaround</div>
+        </div>
+        <div class="svc-row">
+          <div class="svc-num">04</div>
+          <div>
+            <div class="svc-name">Reports &amp; Documentation</div>
+            <div class="svc-desc">Writeups, README files, technical reports formatted to your rubric.</div>
+          </div>
+          <div class="svc-tag">on request</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">recent work</div>
+        <h2>A few graded, submitted, shipped</h2>
+      </div>
+      <div class="projects-grid reveal">
+        <div class="card">
+          <div class="check">✓</div>
+          <div>
+            <div class="k">assignment</div>
+            <h3>Binary Search Tree Visualizer</h3>
+            <p>Interactive DSA assignment with step-by-step traversal animation.</p>
+          </div>
+          <div class="stack"><span>Python</span><span>Tkinter</span></div>
+        </div>
+        <div class="card">
+          <div class="check">✓</div>
+          <div>
+            <div class="k">freelance</div>
+            <h3>Inventory Dashboard</h3>
+            <p>Small business stock tracker with low-stock alerts and CSV export.</p>
+          </div>
+          <div class="stack"><span>React</span><span>Flask</span></div>
+        </div>
+        <div class="card">
+          <div class="check">✓</div>
+          <div>
+            <div class="k">coding task</div>
+            <h3>Sorting Algorithms Benchmark</h3>
+            <p>Comparison report with runtime charts across five algorithms.</p>
+          </div>
+          <div class="stack"><span>Python</span><span>Matplotlib</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">toolbox</div>
+        <h2>Stack I work in</h2>
+      </div>
+      <div class="skills-wrap reveal">
+        <div class="chip"><b>Python</b> · Django · Flask</div>
+        <div class="chip"><b>JavaScript</b> · React · Node</div>
+        <div class="chip">SQL &amp; NoSQL</div>
+        <div class="chip">Java / C++</div>
+        <div class="chip">Pandas / NumPy</div>
+        <div class="chip">HTML / CSS</div>
+        <div class="chip">Git &amp; GitHub</div>
+        <div class="chip">Excel / Sheets</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">how it works</div>
+        <h2>Four steps, no drama</h2>
+      </div>
+      <div class="process reveal">
+        <div class="p-step"><div class="n">01</div><h4>Send the brief</h4><p>Message me on WhatsApp with the task and deadline.</p></div>
+        <div class="p-step"><div class="n">02</div><h4>Get a quote</h4><p>Fixed price and delivery time, confirmed upfront.</p></div>
+        <div class="p-step"><div class="n">03</div><h4>I build it</h4><p>Regular updates if the task runs more than a day.</p></div>
+        <div class="p-step"><div class="n">04</div><h4>Review &amp; revise</h4><p>Free revisions until it matches the brief.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="reveal">
+        <h2>Got a deadline?<br>Let's beat it.</h2>
+        <p>Send the task, the rubric, and the due date — I'll reply with a quote within the hour.</p>
+        <div class="cta-row">
+          <!-- EDIT: replace number -->
+          <a class="btn-primary" href="https://wa.me/+19098953904?text=Hi%20collin%2C%20I%20need%20help%20with%20an%20assignment" target="_blank" rel="noopener">
+            Chat on WhatsApp
+          </a>
+          <!-- EDIT: replace email -->
+          <a class="btn-ghost" href="mailto:collinkipchumba715@gmail.com">collinkipchumba715@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 collin kipchumba — Assignment Help &amp; Freelance Code</p>
+    <p>Nairobi, Kenya · Replies within 24h</p>
+  </div>
+</footer>
+
+<script>
+  // --- terminal typing effect ---
+  const lines = [
+    { text: '$ services --list', cls: 'kw' },
+    { text: '> assignments, web dev, data tasks, reports', cls: '' },
+    { text: '', cls: '' },
+    { text: '$ status check.py', cls: 'kw' },
+    { text: '> compiling...  done', cls: '' },
+    { text: '> tests passed:  38/38', cls: '' },
+    { text: '> deadline:      met  # always', cls: 'cmt' },
+    { text: '', cls: '' },
+    { text: '$ grade --this', cls: 'kw' },
+  ];
+  const term = document.getElementById('term');
+  const stamp = document.getElementById('stamp');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function typeLines(){
+    let i = 0;
+    function next(){
+      if(i >= lines.length){
+        stamp.classList.add('show');
+        return;
+      }
+      const div = document.createElement('div');
+      div.className = 'term-line';
+      div.textContent = lines[i].text;
+      term.insertBefore(div, stamp);
+      i++;
+      setTimeout(next, reduced ? 0 : 220);
+    }
+    next();
+  }
+  typeLines();
+
+  // --- scroll reveal ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
